@@ -1,5 +1,6 @@
 import Link from "next/link"
 import "./global.css"
+import NavMenu from "../comp/NavMenu"
 
 export default function RootLayout({children}){
   return(
@@ -11,13 +12,15 @@ export default function RootLayout({children}){
         <title>To Do List</title>
       </head>
       <body>
-        <nav>
-          <ul>
-            <Link href="/">Home</Link>
-            <Link href="/todo-list">To Do Lists</Link>
+        <nav className="nav">
+          <ul className="">
+            <NavMenu href="/">Home</NavMenu>
+            <NavMenu href="/todo-list">To Do Lists</NavMenu>
           </ul>
         </nav>
-        {children}
+        <main className="main">
+          {children}
+        </main>
       </body>
     </html>
   )
