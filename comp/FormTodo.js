@@ -1,13 +1,27 @@
 "use client";
-
+import axios from 'axios';
 import TodoInput from './TodoInput';
 
 export default function FormTodo() {
-  const handleSubmit = (e)=>{
-    e.preventDefault();
-    const formData = new FormData();
-
-
+  
+  async function handleSubmit (e) {
+    
+      e.preventDefault();
+      const formData = new FormData(e.target);
+  
+      const res = await fetch('api/todos', {
+        method: 'POST',
+        body: JSON.stringify({
+          todo: formData.get('todo'),
+          date: formData.get('date'),
+          time: formData.get('time')
+        })
+      });
+  
+      // const data = res;
+      console.log(res);
+      e.target.reset();
+    
   }
   return (
   <>
@@ -16,17 +30,17 @@ export default function FormTodo() {
 <form onSubmit={handleSubmit} className="form">
   <div className="inner-box">
     <label className="label">Todo</label>
-    <TodoInput />
+    <TodoInput name = "todo"/>
   </div>
 
   <div className="inner-box">
     <label className="label">Todo</label>
-    <TodoInput type='date' />
+    <TodoInput name="date" type='date' />
   </div>
 
   <div className="inner-box">
     <label className="label">Todo</label>
-    <TodoInput type='time'/>
+    <TodoInput name="time" type='time'/>
   </div>
 
   <div className="buttonCont">
@@ -37,5 +51,5 @@ export default function FormTodo() {
 
 </div>
   </>
- )
+  )
 }
