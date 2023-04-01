@@ -18,9 +18,11 @@ const Inputs = styled.input`
 
 export default function TodoInput({
   type="text" ,
+  value="value",
   placeholder="add your task" ,
   name="todo",
-  id="todo" 
+  id="todo", 
+  onchange=()=>{}
 }){
   return (
     <Inputs 
@@ -28,6 +30,8 @@ export default function TodoInput({
     placeholder={placeholder}
     name={name} 
     id={id} 
+    value={value}
+    onChange={onchange}
   />
   )
 }

@@ -2,12 +2,16 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 // import styles from '@/styles/Home.module.css'
 import NavMenu from '@/comp/NavMenu'
-// import TodoInput from '@/comp/TodoInput'
-import Link from 'next/link'
+import TodoInput from '@/comp/TodoInput'
+import FormTodo from '@/comp/FormTodo'
+import { useRouter } from 'next/router'
+// import { prisma } from '@/server/db/client'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -19,7 +23,9 @@ export default function Home() {
       <main>
         <NavMenu href="/">Home</NavMenu>
         <NavMenu href="/addNote">To Do Lists</NavMenu>
-        <h1>Todo List</h1>
+        <h1>Todo</h1>
+
+          <FormTodo />
       </main>
     </>
   )
