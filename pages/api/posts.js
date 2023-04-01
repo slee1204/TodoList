@@ -5,6 +5,18 @@ export default async function handler(req, res) {
 
   switch (method) {
 
+    case 'GET':
+      const data = await prisma.note.findMany({
+        select: {
+          id: true,
+          todo: true,
+          date: true,
+          time: true,
+        }
+      })
+      console.log(data)
+      res.status(200).json(data)
+      break
     case 'POST':
       const { todo, date, time } = req.body
       const Note = await prisma.note.create({
