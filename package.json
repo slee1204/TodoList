@@ -1,11 +1,16 @@
 {
+<<<<<<< HEAD
   "name": "notes",
+=======
+  "name": "todolist",
+>>>>>>> main/main
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+<<<<<<< HEAD
     "lint": "next lint",
     "migrate:dev": "npx dotenv -e .env.local -- prisma migrate dev",
     "db:push": "npx dotenv -e .env.local -- prisma db push",
@@ -14,19 +19,29 @@
     "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
     "prisma:studio": "npx dotenv -e .env.local -- prisma studio",
     "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
+=======
+    "lint": "next lint"
+>>>>>>> main/main
   },
   "dependencies": {
     "@prisma/client": "^4.12.0",
     "axios": "^1.3.4",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+<<<<<<< HEAD
+=======
+    "mysql2": "^3.2.0",
+>>>>>>> main/main
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.9"
+<<<<<<< HEAD
   },
   "devDependencies": {
     "dotenv-cli": "^7.1.0",
     "prisma": "^4.12.0"
+=======
+>>>>>>> main/main
   }
 }
