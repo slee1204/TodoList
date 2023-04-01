@@ -46,7 +46,7 @@ export default function FormTodo(props) {
         <div >
           <label >Date</label>
           <input 
-            type="text" 
+            type="date" 
             value={date} 
             onChange={(e) => setDate(e.target.value)} 
             // addDate={addDate}
@@ -54,9 +54,9 @@ export default function FormTodo(props) {
         </div>
 
         <div >
-          <label >Time</label>
+          <label >Desc</label>
           <input 
-            type="text" 
+            type="time" 
             value={time} 
             onChange={(e) => setTime(e.target.value)} 
             // addTime={addTime}
