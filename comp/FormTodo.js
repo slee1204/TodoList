@@ -2,17 +2,18 @@
 import axios from 'axios';
 // import TodoInput from './TodoInput';
 import {useState, useEffect} from 'react';
+import {useRouter} from 'next/router';
 
 export default function FormTodo(props) {
 
-  const [todo, setTodo] = useState("")
+  const router = useRouter();
+
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")
   const [posts, setPosts] = useState(props.posts)
   
-  // const addTodo = (e) => setTodo(e.target.value);
-  // const addDate = (e) => setDate(e.target.value);
-  // const addTime = (e) => setTime(e.target.value);
 
   useEffect(()=>{
     setPosts(props.posts)
@@ -21,11 +22,13 @@ export default function FormTodo(props) {
     
       e.preventDefault();
       const {data}  = await axios.post('/api/posts', {
-        todo,
+        title,
+        content,
         date,
         time,
       })
       console.log(data)
+      router.push('/profile')
   }
 
   
@@ -35,11 +38,20 @@ export default function FormTodo(props) {
 
       <form onSubmit={handleSubmit} className="form">
         <div >
-          <label >Todo</label>
+          <label >Title</label>
           <input 
             type="text" 
-            value={todo} 
-            onChange={(e) => setTodo(e.target.value)} 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
+          />
+        </div>
+
+        <div >
+          <label >Content</label>
+          <input 
+            type="text" 
+            value={content} 
+            onChange={(e) => setContent(e.target.value)} 
           />
         </div>
 
@@ -49,7 +61,6 @@ export default function FormTodo(props) {
             type="text" 
             value={date} 
             onChange={(e) => setDate(e.target.value)} 
-            // addDate={addDate}
           />
         </div>
 
@@ -59,7 +70,6 @@ export default function FormTodo(props) {
             type="text" 
             value={time} 
             onChange={(e) => setTime(e.target.value)} 
-            // addTime={addTime}
           />
         </div>
 
