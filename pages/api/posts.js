@@ -31,12 +31,23 @@ export default async function handler(req, res) {
         return;
       }
 
+      const prismaUser = await prisma.user.findUnique({
+        where: {
+          email: session.user.email },
+      })
+
+      if (!prismaUser) {
+        res.status(401).json({ message: 'Not authorized' })
+        return;
+      }
+
       const { todo, date, time } = req.body
       const Note = await prisma.note.create({
         data: {
           todo,
           date,
-          time
+          time,
+          userId: prismaUser.id,
         }
       })
       console.log(Note);
