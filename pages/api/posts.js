@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   switch (method) {
 
     case 'GET':
-      const data = await prisma.note.findMany({
+      let data = await prisma.note.findMany({
         select: {
           id: true,
           todo: true,
@@ -14,6 +14,8 @@ export default async function handler(req, res) {
           time: true,
         }
       })
+      data = data.map((todo) => ({
+        ...todo}))
       console.log(data)
       res.status(200).json(data)
       break
