@@ -27,22 +27,22 @@ export default function Profile() {
 
 
 
-// export async function getServerSideProps(context) {
-//   const session = await getServerSession(context.req, context.res, authOptions)
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions)
 
-//   if (!session) {
-//     //redirect to login page
-//     return {
-//       redirect: {
-//         destination: "/api/auth/signin",
-//         permanent: false,
-//       },
-//     }
-//   }
+  if (!session) {
+    //redirect to login page
+    return {
+      redirect: {
+        destination: "/api/auth/signin",
+        permanent: false,
+      },
+    }
+  }
 
-//   return {
-//     props: {
-//       session,
-//     },
-//   }
-// }
+  return {
+    props: {
+      session,
+    },
+  }
+}
