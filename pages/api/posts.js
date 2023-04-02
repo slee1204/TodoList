@@ -1,4 +1,7 @@
 import { prisma } from "@/server/db/client";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./auth/[...nextauth]";
+
 
 export default async function handler(req, res) {
   const { method } = req
@@ -20,6 +23,14 @@ export default async function handler(req, res) {
       res.status(200).json(data)
       break
     case 'POST':
+      const session = await getServerSession(req, res, authOptions)
+
+      //if not logged in
+      if (!session) {
+        res.status(401).json({ message: 'Not authorized' })
+        return;
+      }
+
       const { todo, date, time } = req.body
       const Note = await prisma.note.create({
         data: {
