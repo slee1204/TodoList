@@ -1,16 +1,16 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 // import styles from '@/styles/Home.module.css'
-import NavMenu from '@/comp/NavMenu'
-import TodoInput from '@/comp/TodoInput'
 import FormTodo from '@/comp/FormTodo'
 import { useRouter } from 'next/router'
 // import { prisma } from '@/server/db/client'
 
-const inter = Inter({ subsets: ['latin'] })
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { getServerSession } from "next-auth/next"
+import { authOptions } from './api/auth/[...nextauth]'
 
-export default function Home() {
-  const router = useRouter();
+export default function addNote ({ user }) {
+
 
   return (
     <>
@@ -21,9 +21,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <NavMenu href="/">Home</NavMenu>
-        <NavMenu href="/addNote">To Do Lists</NavMenu>
-        <h1>Todo</h1>
+
+        <h1>Make a new Todo List</h1>
 
           <FormTodo />
           <button onClick={()=>router.push("/profile")}>Back to profile</button>
