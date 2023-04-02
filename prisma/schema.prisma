@@ -18,8 +18,17 @@ model User {
   accounts      Account[]
   sessions      Session[]
   notes         Note[]
-  titles        Title[]
-  contents      Content[]
+  todos        Todo[]
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  notes     Note[]
 }
 model Note {
   id        Int      @id @default(autoincrement())
@@ -31,35 +40,10 @@ model Note {
   updatedAt DateTime @updatedAt
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  titles    Title[]
-  contents  Content[]
-  @@unique([userId])
+  todoId    Int
+  todo      Todo     @relation(fields: [todoId], references: [id])
+  @@unique([userId, todoId])
 }
-
-model Title {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  noteId    Int
-  note      Note     @relation(fields: [noteId], references: [id])
-
-}
-
-model Content {
-  id        Int      @id @default(autoincrement())
-  desc      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  noteId    Int
-  note      Note     @relation(fields: [noteId], references: [id])
-
-}
-
 
 
 model Account {
