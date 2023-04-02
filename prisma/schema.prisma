@@ -18,24 +18,25 @@ model User {
   accounts      Account[]
   sessions      Session[]
   notes         Note[]
+  titles        Title[]
   contents      Content[]
-  todos         Todo[]
 }
 model Note {
   id        Int      @id @default(autoincrement())
   title     String
-  desc      String
+  content   String
   date      String
   time      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  todos     Todo[]
-  content   Content[]
+  titles    Title[]
+  contents   Content[]
+  @@unique([userId])
 }
 
-model Todo {
+model Title {
   id        Int      @id @default(autoincrement())
   name      String
   createdAt DateTime @default(now())
@@ -48,7 +49,7 @@ model Todo {
 
 model Content {
   id        Int      @id @default(autoincrement())
-  con      String
+  desc      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String
@@ -56,7 +57,6 @@ model Content {
   noteId    Int
   note      Note     @relation(fields: [noteId], references: [id])
 }
-
 
 
 model Account {
