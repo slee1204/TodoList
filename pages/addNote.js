@@ -26,6 +26,8 @@ export default function Home() {
         <h1>Todo</h1>
 
           <FormTodo />
+          <button onClick={()=>router.push("/profile")}>Back to profile</button>
+          
       </main>
     </>
   )
