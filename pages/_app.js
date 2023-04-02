@@ -3,7 +3,7 @@ import NavMenu from '@/comp/NavMenu'
 import { SessionProvider } from "next-auth/react"
 
 
-export default function App({ Component, pageProps: {session, ...pageProps} }) {
+export default function App({ Component, pageProps: { session, ...pageProps }, }) {
   return (
   <>
   {/* //session = {session}인지 pageProps.session인지 확인해야함 */}
