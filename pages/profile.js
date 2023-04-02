@@ -12,7 +12,8 @@ export default function Profile({notesArray}) {
     const todoNotes = notesArray.map((note) => (
       <div key={note.id} style={{backgroundColor:"lavender"}}>
         <div>
-          <p>{note.todo}</p>
+          <p>{note.title}</p>
+          <p>{note.content}</p>
           <p>{note.date}</p>
           <p>{note.time}</p>
         </div>
