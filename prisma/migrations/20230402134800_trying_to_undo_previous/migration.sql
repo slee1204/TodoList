@@ -3,7 +3,6 @@
 
   - You are about to drop the `Content` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `Title` table. If the table is not empty, all the data it contains will be lost.
-  - A unique constraint covering the columns `[userId,todoId]` on the table `Note` will be added. If there are existing duplicate values, this will fail.
   - Added the required column `todoId` to the `Note` table without a default value. This is not possible if the table is not empty.
 
 */
@@ -41,9 +40,6 @@ CREATE TABLE "Todo" (
 
     CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "Note_userId_todoId_key" ON "Note"("userId", "todoId");
 
 -- AddForeignKey
 ALTER TABLE "Todo" ADD CONSTRAINT "Todo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

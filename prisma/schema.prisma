@@ -42,7 +42,6 @@ model Note {
   user      User     @relation(fields: [userId], references: [id])
   todoId    Int
   todo      Todo     @relation(fields: [todoId], references: [id])
-  @@unique([userId, todoId])
 }
 
 
