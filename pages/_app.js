@@ -8,8 +8,7 @@ export default function App({ Component, pageProps: { session, ...pageProps }, }
   <>
   {/* //session = {session}인지 pageProps.session인지 확인해야함 */}
     <SessionProvider session={session}>
-      <NavMenu href="/">Home</NavMenu>
-      <NavMenu href="/addNote">To Do Lists</NavMenu>
+      <NavMenu />
       <Component {...pageProps} />
     </SessionProvider>
   </>

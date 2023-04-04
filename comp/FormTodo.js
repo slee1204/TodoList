@@ -8,26 +8,21 @@ export default function FormTodo(props) {
 
   const router = useRouter();
 
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
-  const [date, setDate] = useState("")
-  const [time, setTime] = useState("")
-  const [posts, setPosts] = useState(props.posts)
+  const [category, setCategory] = useState("")
+  const [todo, setTodo] = useState(props.todos)
   
-
   useEffect(()=>{
-    setPosts(props.posts)
-  },[props.posts])
+    setTodo(props.todos)
+  },[props.todos])
+  
   const handleSubmit = async (e) => {
     
       e.preventDefault();
-      const {data}  = await axios.post('/api/posts', {
-        title,
-        content,
-        date,
-        time,
+      const {data}  = await axios.post('/api/todos', {
+        category
       })
       console.log(data)
+      // setClear()
       router.push('/profile')
   }
 
@@ -38,43 +33,16 @@ export default function FormTodo(props) {
 
       <form onSubmit={handleSubmit} className="form">
         <div >
-          <label >Title</label>
+          <label >What kind of Todo is it?</label>
           <input 
             type="text" 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
+            value={category} 
+            onChange={(e) => setCategory(e.target.value)} 
           />
         </div>
 
         <div >
-          <label >Content</label>
-          <input 
-            type="text" 
-            value={content} 
-            onChange={(e) => setContent(e.target.value)} 
-          />
-        </div>
-
-        <div >
-          <label >Date</label>
-          <input 
-            type="text" 
-            value={date} 
-            onChange={(e) => setDate(e.target.value)} 
-          />
-        </div>
-
-        <div >
-          <label >Time</label>
-          <input 
-            type="text" 
-            value={time} 
-            onChange={(e) => setTime(e.target.value)} 
-          />
-        </div>
-
-        <div >
-          <button type="submit">Add</button>
+          <button type="submit">Add into your Todo Lists</button>
         </div>
 
       </form>

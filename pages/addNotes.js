@@ -8,7 +8,7 @@ import { authOptions } from "./api/auth/[...nextauth]";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function addNote({ listsArray }) {
+export default function addDetail({ noteArray }) {
 
   const router = useRouter();
   const { data: session } = useSession();
@@ -23,21 +23,21 @@ export default function addNote({ listsArray }) {
     );
   }
 
-  const [category, setCategory] = useState("")
-  const [todo, setTodo] = useState(listsArray)
+  const [detail, setDetail] = useState("")
+  const [noteDetail, setNoteDetail] = useState(noteArray)
   
   useEffect(()=>{
-    setTodo(listsArray)
-  },[listsArray])
+    setNoteDetail(noteArray)
+  },[noteArray])
 
   const handleSubmit = async (e) => {
     
     e.preventDefault();
-    const {data}  = await axios.post(`/api/todos/`, {
-      category
+    const {data}  = await axios.post(`/api/notes`, {
+      detail
     })
-    setTodo([...todo, data])
-    console.log(data)
+    setNoteDetail([...noteDetail, data])
+    console.log("this is data",data)
     // setClear()
     router.push('/profile')
 }
@@ -53,13 +53,13 @@ export default function addNote({ listsArray }) {
         <h1>Add a new Todo on the List</h1>
 
         <div>
-          <form onSubmit={handleSubmit} className="form">
+          <form onSubmit={handleSubmit}>
             <div>
-              <label>What kind of Todo is it?</label>
+              <label>Add Note</label>
               <input
                 type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                value={detail}
+                onChange={(e) => setDetail(e.target.value)}
               />
             </div>
 
@@ -75,7 +75,7 @@ export default function addNote({ listsArray }) {
 }
 
 export async function getServerSideProps(context) {
-  const todos = await prisma.todo.findMany({
+  const notes = await prisma.note.findMany({
     orderBy: {
       id: "desc",
     },
@@ -83,16 +83,16 @@ export async function getServerSideProps(context) {
       user: true,
     },
   });
-  console.log(todos);
-  const todoList = JSON.parse(JSON.stringify(todos)) || [];
-  const listsArray = Object.values(todoList);
+  console.log("thisisnote",notes);
+  const noteList = JSON.parse(JSON.stringify(notes)) || [];
+  const noteArray = Object.values(noteList);
 
   const session = await getServerSession(context.req, context.res, authOptions);
 
   return {
     props: {
       session,
-      listsArray,
+      noteArray,
     },
   };
 }

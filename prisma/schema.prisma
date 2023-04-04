@@ -17,45 +17,29 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  todos         Todo[]
   notes         Note[]
-  titles        Title[]
-  contents      Content[]
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  category  String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  notes     Note[]
 }
 model Note {
   id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  date      String
-  time      String
+  detail    String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  todoId    Int
+  todo      Todo     @relation(fields: [todoId], references: [id])
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  titles    Title[]
-  contents   Content[]
-  @@unique([userId])
-}
 
-model Title {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  noteId    Int
-  note      Note     @relation(fields: [noteId], references: [id])
-}
-
-model Content {
-  id        Int      @id @default(autoincrement())
-  desc      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  noteId    Int
-  note      Note     @relation(fields: [noteId], references: [id])
+  @@unique (fields: [todoId, id], name: "todoId_noteId")
 }
 
 
